@@ -1,5 +1,22 @@
 import extract_msg
 from tkinter import filedialog
+import pypff
+
+
+def open_Pst_File():
+    int_folder='C:\\Users\\AlexThiery\\DevOp\\input'
+    filedialog.askopenfilename(initialdir=int_folder)
+    pst_file=pypff.file()
+    return pst_file
+
+class pst_File_Extract:
+    def test(self, pst_file):
+        root_inf=pst_file.get_root_folder()
+        for folder in root_inf.sub_folders:
+            print('Folder:', folder.name)
+    pst_file.close()
+
+
 
 
 def open_file():
@@ -32,7 +49,7 @@ class Readfile:
             d.write(clean_data)
             d.close()
         with open('slask.txt', 'r') as d:
-            lines = [line for line in d.readlines() if line.strip() !='']
+            lines = [line for line in d.readlines() if line.strip() != '']
 
         with open('slask.txt', 'w', encoding='utf-8'):
             pass
@@ -42,10 +59,10 @@ class Readfile:
 
 
 if __name__=='__main__':
-    file = open_file()
-    read_file = Readfile(file)
-    read_file.output()
-    read_file.clean()
+    pst_file = open_Pst_File()
+    read_file = pst_File_Extract
+    # read_file.output()
+    # read_file.clean()
 
 
 
